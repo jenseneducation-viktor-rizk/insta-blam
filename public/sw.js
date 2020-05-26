@@ -2,7 +2,7 @@ const filesToCache = [
     'offline.html'
 ];
   
-const staticCacheName = 'v1';
+const staticCacheName = 'v2';
 
 // INSTALL
 self.addEventListener('install', event => {

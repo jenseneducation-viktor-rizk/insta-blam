@@ -1,21 +1,25 @@
 <template>
   <div class="camera">
     <video v-show="toggle" ref="video" autoplay class="cameraStream"></video>
-    <PhotoButtons @takePicture="takePicture"
-    @addFilter="addFilter"/>
+    <NavBar @takePicture="takePicture"
+    @addFilter="addFilter" 
+    v-show="!filterOn"/>
     <MyPicture v-show="!toggle"/>
+    <Filters v-show="filterOn" @confirmFilter="confirmFilter" @changeFilter="changeFilter(myFilter)"/>
   </div>
 </template>
 
 <script>
 
-import PhotoButtons from "@/components/PhotoButtons"
+import NavBar from "@/components/NavBar"
 import MyPicture from "@/components/MyPicture"
+import Filters from "@/components/Filters"
 
 export default {
     name: "Camera",
-    components: { PhotoButtons, MyPicture },
+    components: { NavBar, MyPicture, Filters },
     data() {return{
+        filterOn: false,
         toggle: true,
         constraints: {
             video: {
@@ -32,6 +36,11 @@ export default {
             }
         }
     }},
+    computed: {
+        myFilter() {
+            return this.$store.state.filter
+        }
+    },
     methods: {
         stream() {
             if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
@@ -58,14 +67,22 @@ export default {
             }
         },
         addFilter() {
+            this.filterOn = true;
+            
+        },
+        changeFilter(val) {
             window.Caman('#my-image', function () {
                 this.revert();
-                this.brightness(10);
-                this.contrast(30);
-                this.sepia(60);
-                this.saturation(-30);
+                this.brightness(val.brightness);
+                this.contrast(val.contrast);
+                this.sepia(val.sepia);
+                this.saturation(val.saturation);
+                this.exposure(val.exposure)
                 this.render();
             });
+        },
+        confirmFilter() {
+            this.filterOn = false;
         }
     },
     beforeMount() {
@@ -86,9 +103,9 @@ export default {
     margin: 0;
     .cameraStream {
         display: block;
-        margin: auto;
-        max-width: 1280px;
-        max-height: 720px;
+        margin: 0 auto auto auto;
+        max-width: 100vw;
+        max-height: 65vh;
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
     }

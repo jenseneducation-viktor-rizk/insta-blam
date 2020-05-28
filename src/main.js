@@ -2,10 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import VueDragscroll from 'vue-dragscroll'
 
 Vue.config.productionTip = false
 Vue.prototype.Caman = window.Caman
-
+Vue.use(VueDragscroll)
 // if('serviceWorker' in navigator){   
 //   navigator.serviceWorker.register('sw.js', {
 //     scope: './'

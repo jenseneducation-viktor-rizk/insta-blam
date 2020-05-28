@@ -105,8 +105,7 @@ export default {
     font-size: .8rem;
     width: 80px;
     height: 80px;
-    margin: 20px;
-    // padding: 50px;
+    margin: 30px;
     border-radius: 100%;
     border: none;
     box-shadow: 5px 5px 12px 0px rgba(0, 0, 0, 0.50);

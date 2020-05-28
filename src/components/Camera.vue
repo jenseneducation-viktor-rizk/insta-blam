@@ -1,10 +1,10 @@
 <template>
   <div class="camera">
-    <video v-show="toggle" ref="video" autoplay class="cameraStream"></video>
+    <video v-show="!showPicture" ref="video" autoplay class="cameraStream"></video>
+    <MyPicture v-show="showPicture"/>
     <NavBar @takePicture="takePicture"
     @addFilter="addFilter" 
     v-show="!filterOn"/>
-    <MyPicture v-show="!toggle"/>
     <Filters v-show="filterOn" @confirmFilter="confirmFilter" @changeFilter="changeFilter(myFilter)"/>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
     components: { NavBar, MyPicture, Filters },
     data() {return{
         filterOn: false,
-        toggle: true,
+        showPicture: false,
         constraints: {
             video: {
                 width: {
@@ -54,16 +54,20 @@ export default {
         takePicture() {
             let ratio = (window.innerHeight < window.innerWidth) ? 16 / 9 : 9 / 16;
             const picture = document.querySelector("canvas");
-            picture.width = (window.innerWidth < 1280) ? window.innerWidth : 1280;
+            // picture.width = (window.innerWidth < 1280) ? window.innerWidth : 1280;
+            picture.width = window.innerWidth
             picture.height = window.innerWidth / ratio;
+            console.log(picture.width);
+            console.log(picture.height)
+            console.log(window.outerWidth)
             const ctx = picture.getContext("2d");
             ctx.imageSmoothingEnabled = true;
             ctx.imageSmoothingQuality = "high";
             ctx.drawImage(this.$refs.video, 0, 0, picture.width, picture.height)
-            if(!this.toggle){
+            if(this.showPicture){
                 window.location.reload(false);
             }else{
-                this.toggle = !this.toggle
+                this.showPicture = !this.showPicture
             }
         },
         addFilter() {

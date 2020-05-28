@@ -84,9 +84,8 @@ export default {
 }
 .btn-container {
     display: flex;
-    // flex-flow: sta;
-    // flex-direction: row;
-    justify-content: first baseline;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
     width: 100vw;
@@ -95,6 +94,8 @@ export default {
 }
 .standardBtn {
     position: relative;
+    flex-shrink: 0;
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -102,10 +103,10 @@ export default {
     background-color: rgb(52, 173, 157);
     font-weight: 400;
     font-size: .8rem;
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
     margin: 20px;
-    padding: 50px;
+    // padding: 50px;
     border-radius: 100%;
     border: none;
     box-shadow: 5px 5px 12px 0px rgba(0, 0, 0, 0.50);

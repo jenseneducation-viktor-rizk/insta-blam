@@ -1,6 +1,6 @@
 <template>
   <div class="camera">
-    <video v-show="!showPicture" ref="video" autoplay class="cameraStream"></video>
+    <video playsinline v-show="!showPicture" ref="video" autoplay class="cameraStream"></video>
     <MyPicture v-show="showPicture"/>
     <NavBar @takePicture="takePicture"
     @addFilter="addFilter" 

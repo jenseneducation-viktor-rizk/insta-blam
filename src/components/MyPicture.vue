@@ -30,13 +30,13 @@ export default {
         justify-content: center;
         align-items: center;
         width: 100vw;
-        height: 60vh;
+        height: 50vh;
         
         canvas {
             display: block;
             margin: 0 auto auto auto;
             max-width: 100vw;
-            max-height: 55vh;
+            max-height: 50vh;
             
         }
         .download-btn {

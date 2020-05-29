@@ -67,13 +67,13 @@ export default {
     width: 100vw;
     height: 200px;
     overflow: hidden;
-    bottom: 20px;
+    bottom: 10px;
 }
 
 .slider {
     position: relative;
     width: 400px;
-    margin: 10px;
+    margin: 5px;
 }
 
 

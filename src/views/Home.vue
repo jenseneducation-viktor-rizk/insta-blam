@@ -106,7 +106,7 @@ export default {
         display: block;
         margin: 0 auto auto auto;
         max-width: 100vw;
-        max-height: 55vh;
+        max-height: 50vh;
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
     }
@@ -124,8 +124,8 @@ export default {
     background-color: rgb(52, 173, 157);
     font-weight: 400;
     font-size: .8rem;
-    width: 75px;
-    height: 75px;
+    width: 70px;
+    height: 70px;
     margin: 18px;
     border-radius: 100%;
     border: none;

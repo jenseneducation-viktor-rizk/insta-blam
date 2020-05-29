@@ -1,65 +1,65 @@
 <template>
 <div class="filters">
-    <div class="btn-container" v-dragscroll.x:firstchilddrag v-dragscroll.x>
-        <button class="standardBtn" > Sepia </button>
-        <div class="sepCont" v-show="showSepia">
-            <label for="sepia">Sepia: {{ filter.sepia }} </label>
-            <input type="range" name="sepia" class="slider" min="0" max="100" value="0" v-model.number="filter.sepia" @change="userFilter(filter)">
-        </div>
+        <div v-show="buttonOrSlider" class="btn-container" v-dragscroll.    x:firstchilddrag v-dragscroll.x>
 
-        <button class="standardBtn" > Saturation </button>
-        <div class="satCont" v-show="showSaturation">
-            <label for="saturation">Saturation: {{ filter.saturation }} </label>
-            <input type="range" name="saturation" class="slider" min="-100" max="100" value="0" v-model.number="filter.saturation" @change="userFilter(filter)">
-        </div>
-
-        <button class="standardBtn"> Brightness </button>
-        <div class="briCont" v-show="showBrightness">
-            <label for="brightness">Brightness: {{ filter.brightness }} </label>
-            <input type="range" name="brightness" class="slider" min="-100" max="100" value="0" v-model.number="filter.brightness" @change="userFilter(filter)">
-        </div>
-        <button class="standardBtn"> Contrast </button>
-        <div class="conCont" v-show="showContrast">
-            <label for="contrast">Contrast: {{ filter.contrast }} </label>
-            <input type="range" name="contrast" class="slider" min="-100" max="100" value="0" v-model.number="filter.contrast" @change="userFilter(filter)">
-        </div>
-        <button class="standardBtn"> Exposure </button>
-        <div class="expCont" v-show="showExposure">
-            <label for="exposure">Exposure: {{ filter.exposure }} </label>
-            <input type="range" name="exposure" class="slider" min="-100" max="100" value="0" v-model.number="filter.exposure" @change="userFilter(filter)">
-        </div>
-        
-        <button class="standardBtn" id="filter-confirm" 
-        @click="confirmFilter">
-        <img src="@/assets/camera.png" alt="" height="50px"></button>
-
+    <div class="shadow-fx">
     </div>
-
+        <MyButton v-for="filter in myFilter" v-bind:key="filter.name"   v-bind:title="filter.name" v-bind:value="filter.value"    @filterClicked="filterClicked"/>
+      
+        </div>
+    <FilterSlide v-show="!buttonOrSlider" v-bind:title="filterSelected" v-bind:value="valueSelected"  @confirmFilter="confirmFilter" @changeFilter="userFilter" />
 </div>
 </template>
 
 <script>
+import MyButton from "@/components/MyButton"
+import FilterSlide from "@/components/FilterSlide"
+
+
 export default {
+    components: { MyButton, FilterSlide },
     data() {return{
-        showSepia: false,
-        showSaturation: false,
-        showBrightness: false,
-        showContrast: false,
-        showExposure: false,
-        filter: {
-            sepia: 0,
-            saturation: 0,
-            brightness: 0,
-            contrast: 0,
-            exposure: 0
-        }
+        buttonOrSlider: true,
+        filterSelected: "",
+        valueSelected: 0
+        // filter: [
+        //   {
+        //     name: "Brightness",
+        //     value: 0
+        //   },
+        //   {
+        //     name: "Contrast",
+        //     value: 0
+        //   },
+        //   {
+        //     name: "Exposure",
+        //     value: 0
+        //   },
+        //   {
+        //     name: "Saturation",
+        //     value: 0
+        //   },
+        //   {
+        //     name: "Sepia",
+        //     value: 0
+        //   }
+        // ]
     }},
+    computed: {
+        myFilter() {
+            return this.$store.state.filter
+        }
+    },
     methods: {
-        confirmFilter() {
-            this.$emit('confirmFilter')
+        filterClicked(title, value) {
+            this.buttonOrSlider = !this.buttonOrSlider
+            this.filterSelected = title
+            this.valueSelected = value
         },
-        userFilter(userVal) {
-            this.$store.dispatch('changeFilter', userVal)
+        confirmFilter() {
+            this.buttonOrSlider = !this.buttonOrSlider;
+        },
+        userFilter() {
             this.$emit('changeFilter')
         }
     }
@@ -82,13 +82,23 @@ export default {
     max-width: 400px;
     margin-bottom: 30px;
 }
+.shadow-fx {
+    display: block;
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,0) 25%, rgba(255,255,255,1) 60%);
+    position: fixed;
+    width: 300px;
+    height: 35vh;
+    z-index: 999;
+    // box-shadow: inset 0 0 30px 20px;
+}
 .btn-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-    width: 100vw;
+    width: 300px;
     height: 35vh;
     overflow: hidden;
 }
@@ -105,10 +115,10 @@ export default {
     font-size: .8rem;
     width: 80px;
     height: 80px;
-    margin: 30px;
+    margin: 20px;
     border-radius: 100%;
     border: none;
-    box-shadow: 5px 5px 12px 0px rgba(0, 0, 0, 0.50);
+    box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.20);
     &:hover {
         background-color: rgb(91, 189, 168);
         cursor: pointer;

@@ -5,22 +5,38 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    filter: {
-      sepia: 0,
-      saturation: 0,
-      brightness: 0,
-      contrast: 0,
-      exposure: 0
-    }
+    filter: [
+      {
+        name: "Brightness",
+        value: 0
+      },
+      {
+        name: "Contrast",
+        value: 0
+      },
+      {
+        name: "Exposure",
+        value: 0
+      },
+      {
+        name: "Saturation",
+        value: 0
+      },
+      {
+        name: "Sepia",
+        value: 0
+      }
+    ]
+    
   },
   mutations: {
-    filterVal(state, filter) {
-      state.filter = filter
+    filterVal(state, obj) {
+      state.filter = state.filter.map(function(item) { return item.name == obj.name ? obj : item; });
     }
   },
   actions: {
-    changeFilter(context, val) {
-      context.commit('filterVal', val)
+    changeFilter(context, obj) {
+      context.commit('filterVal', obj)
     }
   }
 })

@@ -5,8 +5,7 @@
     <NavBar @takePicture="takePicture"
     @addFilter="addFilter" 
     v-show="!filterOn"/>
-    <!-- <MyButton v-show="filterOn" v-for="filter in myFilter" v-bind:key="filter.name" v-bind:title="filter.name"/> -->
-    <Filters v-show="filterOn" @changeFilter="changeFilter(myFilter)"/>
+    <Filters v-show="filterOn" @takePicture="takePicture" @changeFilter="changeFilter(myFilter)"/>
   </div>
 </template>
 
@@ -15,13 +14,11 @@
 import NavBar from "@/components/NavBar"
 import MyPicture from "@/components/MyPicture"
 import Filters from "@/components/Filters"
-// import MyButton from "@/components/MyButton"
 
 export default {
     name: "Camera",
     components: { NavBar, MyPicture, Filters },
     data() {return{
-        // filterTitle: "Seppen",
         filterOn: false,
         showPicture: false,
         constraints: {

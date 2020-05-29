@@ -1,6 +1,9 @@
 <template>
 <div class="filters">
         <div v-show="buttonOrSlider" class="btn-container justify-start" v-dragscroll:firstchilddrag v-dragscroll>
+            <button class="standard-btn" @click="takePicture">
+            <img src="@/assets/camera.png" alt="Camera" class="camera-icon">
+            </button>
             <MyButton v-for="filter in myFilter" v-bind:key="filter.name"   v-bind:title="filter.   name" v-bind:value="filter.value"    @filterClicked="filterClicked"/>
         </div>
     <FilterSlide class="slider-container" v-show="!buttonOrSlider" v-bind:title="filterSelected" v-bind:value="valueSelected"  @confirmFilter="confirmFilter" @changeFilter="userFilter" />
@@ -25,6 +28,10 @@ export default {
         }
     },
     methods: {
+        takePicture() {
+            this.showFilter = !this.showFilter
+            this.$emit('takePicture')
+        },
         filterClicked(title, value) {
             this.buttonOrSlider = !this.buttonOrSlider
             this.filterSelected = title

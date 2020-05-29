@@ -126,7 +126,7 @@ export default {
     font-size: .8rem;
     width: 75px;
     height: 75px;
-    margin: 20px;
+    margin: 18px;
     border-radius: 100%;
     border: none;
     box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.20);

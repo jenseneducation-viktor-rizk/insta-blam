@@ -80,7 +80,7 @@ export default {
 .justify-start {
     justify-content: flex-start;
 }
-@media screen and (min-width: 550px) {
+@media screen and (min-width: 650px) {
     .justify-start {
     justify-content: space-evenly;
 }

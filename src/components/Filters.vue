@@ -2,8 +2,6 @@
 <div class="filters">
         <div v-show="buttonOrSlider" class="btn-container" v-dragscroll.    x:firstchilddrag v-dragscroll.x>
 
-    <div class="shadow-fx">
-    </div>
         <MyButton v-for="filter in myFilter" v-bind:key="filter.name"   v-bind:title="filter.name" v-bind:value="filter.value"    @filterClicked="filterClicked"/>
       
         </div>
@@ -81,16 +79,6 @@ export default {
     position: relative;
     max-width: 400px;
     margin-bottom: 30px;
-}
-.shadow-fx {
-    display: block;
-    background: rgb(255,255,255);
-    background: radial-gradient(circle, rgba(255,255,255,0) 25%, rgba(255,255,255,1) 60%);
-    position: fixed;
-    width: 300px;
-    height: 35vh;
-    z-index: 999;
-    // box-shadow: inset 0 0 30px 20px;
 }
 .btn-container {
     display: flex;

@@ -47,6 +47,7 @@ export default {
     methods: {
         stream() {
             if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
+                
                 navigator.mediaDevices.getUserMedia(this.constraints).then(stream => {
                     const videoPlayer = document.querySelector("video")
                     videoPlayer.srcObject = stream
@@ -57,12 +58,12 @@ export default {
         takePicture() {
             let ratio = (window.innerHeight < window.innerWidth) ? 16 / 9 : 9 / 16;
             const picture = document.querySelector("canvas");
-            // picture.width = (window.innerWidth < 1280) ? window.innerWidth : 1280;
             picture.width = window.innerWidth
             picture.height = window.innerWidth / ratio;
             const ctx = picture.getContext("2d");
             ctx.imageSmoothingEnabled = true;
             ctx.imageSmoothingQuality = "high";
+            ctx.translate(picture.width, 0);ctx.scale(-1,1)
             ctx.drawImage(this.$refs.video, 0, 0, picture.width, picture.height)
             if(this.showPicture){
                 window.location.reload(false);
@@ -98,19 +99,54 @@ export default {
 .camera {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: 0;
     padding: 0;
     width: 100vw;
-    height: 100vw;
+    height: 100vh;
     margin: 0;
     .cameraStream {
         display: block;
         margin: 0 auto auto auto;
         max-width: 100vw;
-        max-height: 65vh;
+        max-height: 55vh;
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
     }
     
+}
+
+.standard-btn {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    background-color: rgb(52, 173, 157);
+    font-weight: 400;
+    font-size: .8rem;
+    width: 75px;
+    height: 75px;
+    margin: 20px;
+    border-radius: 100%;
+    border: none;
+    box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.20);
+    &:hover {
+        background-color: rgb(91, 189, 168);
+        cursor: pointer;
+    }
+    &:focus {
+        outline: none;
+    }
+    &:active {
+        top: 2px;
+    }
+    .camera-icon {
+        position: relative;
+        margin: auto;
+        height: 36px;
+    }
 }
 </style>

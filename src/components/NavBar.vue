@@ -1,14 +1,16 @@
 <template>
-<div class="photo-buttons">
-    <div class="btn-container">
-        <button class="standardBtn" @click="takePicture">
+
+    <div class="btn-container nav-bar">
+        <button class="standard-btn" @click="takePicture">
             <img src="@/assets/camera.png" alt="Camera" class="camera-icon">
         </button>
-        <button v-show="showFilter" class="standardBtn" @click="addFilter">
+        <button v-show="showFilter" class="standard-btn" @click="addFilter">
             Filter
         </button>
+        
+        
     </div>
-</div>
+
 </template>
 
 <script>
@@ -25,59 +27,24 @@ export default {
         addFilter() {
             this.$emit('addFilter')
         }
+        
     }
 
 }
 </script>
 
-<style lang="scss" scoped>
-.photo-buttons {
+<style lang="scss">
+.btn-container {
     position: fixed;
     display: flex;
-    z-index: 999;
-    width: 100vw;
-    height: 100vh;
+    flex-direction: row;
     justify-content: space-around;
     align-items: flex-end;
-    margin-bottom: 14vh;
-}
-.btn-container {
-    display: flex;
-    position: relative;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100vw;
-    height: 35vh;
+    max-width: 100vw;
+    width: 800px;
+    height: 100px;
     overflow: hidden;
+    bottom: 20px;
 }
-.standardBtn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    background-color: rgb(52, 173, 157);
-    font-weight: 400;
-    font-size: .8rem;
-    width: 80px;
-    height: 80px;
-    border-radius: 50px;
-    border: none;
-    box-shadow: 5px 5px 12px 0px rgba(0, 0, 0, 0.50);
-    &:hover {
-        background-color: rgb(91, 189, 168);
-        cursor: pointer;
-    }
-    &:focus {
-        outline: none;
-    }
-    &:active {
-        top: 2px;
-    }
-    .camera-icon {
-        position: relative;
-        margin: auto;
-        height: 36px;
-    }
-}
+
 </style>

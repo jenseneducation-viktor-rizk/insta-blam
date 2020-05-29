@@ -1,10 +1,10 @@
 <template>
 <div class="filter-slide">
-    <p>{{title}}: {{this.value}} </p>
-    <label> New value: {{ slideVal }} </label>
+    <p>{{title}} on photo: {{this.value}} </p>
+    <label> {{ slideVal }} </label>
     <input type="range" class="slider" min="-100" max="100" v-model.number="slideVal" @change="userFilter(slideVal)">
     
-    <button class="standardBtn" id="filter-confirm" 
+    <button class="standard-btn" id="filter-confirm" 
         @click="confirmFilter">Back</button>
 </div>
 </template>
@@ -16,7 +16,7 @@ export default {
         value: Number
     },
     data() {return{
-        slideVal: this.value
+        slideVal: 0
     }},
     methods: {
         userFilter(slideVal) {
